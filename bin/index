@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const fs = require('fs');
+const path = require('path');
+const shelljs = require('shelljs');
+
+let config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config.json'), {encoding: "utf8"}));
+
+
+
+program
+.version('1.0.0')
+.option('-h', 'link  get your registore path  do so path')
+
+// 同步
+program
+.command('sync')
+.action(function(){
+  console.log(config.libraryPath)
+  if(config.libraryPath != null){
+    shelljs.cd(config.libraryPath)
+    shelljs.exec(`fis3 release -wd ${config.libraryPath}`)
+  }
+})
+
+// 获取仓库地址
+program
+.command('link')
+.action(function(){
+
+  config.libraryPath = process.cwd()
+  let configPath = path.resolve(__dirname, "../config.json")
+  fs.writeFileSync(configPath, JSON.stringify(config));
+  console.log(config.libraryPath)
+  process.exit(0);
+
+});
+
+// 关闭 没验证是否执行
+program
+.command('close')
+.action(() => {
+  process.exit(0);
+})
+
+
+program.on('--help', () => {
+  console.log(
+    `
+      mvtool sync  同步仓库代码
+      mvtool link  获取仓库路径
+    `
+  )
+})
+
+program.parse(process.argv);

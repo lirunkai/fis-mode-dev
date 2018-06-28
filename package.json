@@ -1,0 +1,20 @@
+{
+  "name": "fis-mode-dev",
+  "version": "1.0.7",
+  "description": "sync",
+  "main": "index.js",
+  "bin": {
+    "mvtool": "bin/index"
+  },
+  "scripts": {
+    "install": "npm install fis3 -g",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "fis3 release -w"
+  },
+  "author": "lirunkai",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.15.1",
+    "shelljs": "^0.8.2"
+  }
+}
