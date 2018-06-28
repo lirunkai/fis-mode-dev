@@ -7,6 +7,11 @@ const shelljs = require('shelljs');
 
 let config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config.json'), {encoding: "utf8"}));
 
+let fisContent = `
+fis.match("*", {
+
+})
+`
 
 
 program
@@ -18,7 +23,9 @@ program
 .command('sync')
 .action(function(){
   let devPath = process.cwd()
-  console.log(config.libraryPath +'=>'+ config.libraryPath)
+  console.log(config.libraryPath +'=>'+ devPath)
+  let fisFilePath = path.resolve(__dirname, 'fis-conf.js')
+  fs.writeFileSync(fisFilePath, fisContent, {encoding: 'utf-8'})
   if(config.libraryPath != null){
     shelljs.cd(config.libraryPath)
     shelljs.exec(`fis3 release -wd ${devPath}`)
