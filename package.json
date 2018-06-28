@@ -1,8 +1,13 @@
 {
   "name": "fis-mode-dev",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "sync",
-  "keywords": ["move", "file", "fis", "watch"],
+  "keywords": [
+    "move",
+    "file",
+    "fis",
+    "watch"
+  ],
   "main": "index.js",
   "bin": {
     "mvtool": "bin/index"
