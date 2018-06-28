@@ -17,10 +17,11 @@ program
 program
 .command('sync')
 .action(function(){
-  console.log(config.libraryPath)
+  let devPath = process.cwd()
+  console.log(config.libraryPath +'=>'+ config.libraryPath)
   if(config.libraryPath != null){
     shelljs.cd(config.libraryPath)
-    shelljs.exec(`fis3 release -wd ${config.libraryPath}`)
+    shelljs.exec(`fis3 release -wd ${devPath}`)
   }
 })
 
