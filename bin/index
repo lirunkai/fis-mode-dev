@@ -15,7 +15,7 @@ fis.match("*", {
 
 
 program
-.version('1.0.0')
+.version(require('../package').version)
 .option('-h', 'link  get your registore path  do so path')
 
 // 同步
