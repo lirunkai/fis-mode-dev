@@ -20,15 +20,20 @@ program
 
 // 同步
 program
-.command('sync')
-.action(function(){
+.command('sync <MMpath>')
+.action(function(MMpath){
+  // 运行的路径
   let devPath = process.cwd()
   console.log(config.libraryPath +'=>'+ devPath)
   if(config.libraryPath != null){
     shelljs.cd(config.libraryPath)
     let dirArr = config.libraryPath.split('/')
     let parentDirName = dirArr[dirArr.length - 1]
-    shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
+    if(MMpath){
+      shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}/${MMpath}`)
+    }  else {
+      shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
+    }
   }
 })
 
