@@ -4,6 +4,8 @@ const program = require('commander');
 const fs = require('fs');
 const path = require('path');
 const shelljs = require('shelljs');
+const childProcess = require('child_process')
+const process = require('process')
 
 let config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config.json'), {encoding: "utf8"}));
 
@@ -28,7 +30,10 @@ program
     shelljs.cd(config.libraryPath)
     let dirArr = config.libraryPath.split('/')
     let parentDirName = dirArr[dirArr.length - 1]
-    shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
+    let grep = childProcess.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
+    process.on('beforeExit', () => {
+      grep.kill('SIGHUP')
+    })
   }
 })
 
