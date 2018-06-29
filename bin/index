@@ -29,7 +29,7 @@ program
     let dirArr = config.libraryPath.split('/')
     let parentDirName = dirArr[dirArr.length - 1]
     if(MMpath){
-      shelljs.exec(`fis3 release -wd ${devPath}/${MMpath}`)
+      shelljs.exec(`fis3 release -wd ${devPath}/${MMpath}/${parentDirName}`)
     }  else {
       shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
     }
