@@ -16,7 +16,6 @@ fis.match("*", {
 
 program
 .version(require('../package').version)
-.option('-h', 'link  get your registore path  do so path')
 
 // 同步
 program
@@ -30,7 +29,7 @@ program
     let dirArr = config.libraryPath.split('/')
     let parentDirName = dirArr[dirArr.length - 1]
     if(MMpath){
-      shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}/${MMpath}`)
+      shelljs.exec(`fis3 release -wd ${devPath}/${MMpath}`)
     }  else {
       shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
     }
