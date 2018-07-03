@@ -8,6 +8,14 @@ const shelljs = require('shelljs');
 let config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config.json'), {encoding: "utf8"}));
 
 let fisContent = `
+
+fis.set('project.ignore', [
+  'node_modules/**',
+  '.git/**',
+  '.svn/**'
+]);
+
+
 fis.match("*", {
 
 })
@@ -19,7 +27,7 @@ program
 
 // 同步
 program
-.command('sync <MMpath>')
+.command('sync [MMpath]')
 .action(function(MMpath){
   // 运行的路径
   let devPath = process.cwd()
@@ -45,7 +53,9 @@ program
   let configPath = path.resolve(__dirname, "../config.json")
   fs.writeFileSync(configPath, JSON.stringify(config));
   let fisFilePath = path.resolve(config.libraryPath, 'fis-conf.js')
-  fs.writeFileSync(fisFilePath, fisContent, {encoding: 'utf-8'})
+  if(!fs.existsSync(config.libraryPath+'/fis-conf.js')){
+    fs.writeFileSync(fisFilePath, fisContent, {encoding: 'utf-8'})
+  }
   console.log(config.libraryPath)
   process.exit(0);
 
