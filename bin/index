@@ -3,7 +3,7 @@
 const program = require('commander');
 const fs = require('fs');
 const path = require('path');
-const shelljs = require('shelljs');
+const shell = require('shelljs');
 
 let config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config.json'), {encoding: "utf8"}));
 
@@ -33,13 +33,13 @@ program
   let devPath = process.cwd()
   console.log(config.libraryPath +'=>'+ devPath)
   if(config.libraryPath != null){
-    shelljs.cd(config.libraryPath)
+    shell.cd(config.libraryPath)
     let dirArr = config.libraryPath.split('/')
     let parentDirName = dirArr[dirArr.length - 1]
     if(MMpath){
-      shelljs.exec(`fis3 release -wd ${devPath}/${MMpath}/${parentDirName}`)
+      shell.exec(`fis3 release -wd ${devPath}/${MMpath}/${parentDirName}`)
     }  else {
-      shelljs.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
+      shell.exec(`fis3 release -wd ${devPath}/${parentDirName}`)
     }
   }
 })
